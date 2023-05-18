@@ -695,6 +695,11 @@ export type PrizeoutOfferValueOptions = {
     value_in_cents: number;
 };
 
+// not passing linting, unused?
+// type OffersRequest = {
+//     prizeoutSessionId: string;
+// };
+
 export const offersSlice = createSlice({
     initialState: offersInitialState,
     name: 'offers',

@@ -26,7 +26,6 @@ const CheckoutPanelView: React.FC = (): React.ReactElement => {
             <div className="grid grid--top-bottom grid--stretch-top">
                 <div className="grid__item">
                     <section className="checkout__brand">
-                        {/* reconsider this section, mabe make it a title */}
                         <h2>{activeOffer ? activeOffer.name : 'Select a Gift Card to view redemption amounts'}</h2>
                         {activeOffer ? (
                             <>
@@ -44,7 +43,6 @@ const CheckoutPanelView: React.FC = (): React.ReactElement => {
                 </div>
                 <div className="grid__item">
                     <section className="checkout__calculation">
-                        {/* change this behavour to check for selected offer amount */}
                         <CheckoutButton disabled={!activeRedemptionOption} />
                     </section>
                 </div>

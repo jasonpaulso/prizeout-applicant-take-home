@@ -8,21 +8,27 @@ const RedemptionAmountGrid: React.FC<{
     setActiveRedemptionOption: (valueOption: PrizeoutOfferValueOptions) => void;
     activeRedemptionOption: PrizeoutOfferValueOptions;
 }> = ({ offer, activeRedemptionOption, setActiveRedemptionOption }): React.ReactElement => {
+    const { giftcard_list } = offer;
+
     return (
         <div className={'redemption-grid-wrapper'}>
             <h4>Select Redemption Amount</h4>
             <div className={'redemption-grid'}>
-                {offer.giftcard_list.map((giftCard) => (
-                    <button
-                        key={giftCard.checkout_value_id}
-                        className={classNames('redemption-grid__item', {
-                            'redemption-grid__item__selected': activeRedemptionOption === giftCard,
-                        })}
-                        onClick={() => setActiveRedemptionOption(giftCard)}
-                    >
-                        {formatCurrency(giftCard.cost_in_cents)}
-                    </button>
-                ))}
+                {giftcard_list.map((giftCard) => {
+                    const { cost_in_cents, checkout_value_id } = giftCard;
+
+                    return (
+                        <button
+                            key={checkout_value_id}
+                            className={classNames('redemption-grid__item', {
+                                'redemption-grid__item__selected': activeRedemptionOption === giftCard,
+                            })}
+                            onClick={() => setActiveRedemptionOption(giftCard)}
+                        >
+                            {formatCurrency(cost_in_cents)}
+                        </button>
+                    );
+                })}
             </div>
         </div>
     );
