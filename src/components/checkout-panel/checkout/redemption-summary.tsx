@@ -1,18 +1,18 @@
 import React from 'react';
-import { PrizeoutOfferValueOptions } from '../../../slices/offers-slice';
 
 import classNames from 'classnames';
+import SelectedOfferValueContext, { SelectedOfferValueContextValue } from '../../../contexts/selectedOfferValueContext';
 import { formatCurrency } from './redemption-amount-grid';
 
-const RedemptionSummary: React.FC<{ activeRedemptionOption: PrizeoutOfferValueOptions }> = ({
-    activeRedemptionOption,
-}): React.ReactElement => {
-    const { cost_in_cents, value_in_cents, display_bonus } = activeRedemptionOption;
+const RedemptionSummary: React.FC = (): React.ReactElement => {
+    const { activeOfferValue } = React.useContext<SelectedOfferValueContextValue>(SelectedOfferValueContext);
+
+    const { cost_in_cents, value_in_cents, display_bonus } = activeOfferValue;
     const bonus = value_in_cents - cost_in_cents;
 
     return (
         <>
-            {activeRedemptionOption ? (
+            {activeOfferValue ? (
                 <div className={'redemption-summary'}>
                     <div className={'redemption-summary__row'}>
                         <span>Redemption Amount</span>

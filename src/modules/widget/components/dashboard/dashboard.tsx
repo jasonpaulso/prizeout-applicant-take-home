@@ -1,15 +1,12 @@
-import React from 'react';
 import Classnames from 'classnames';
-import { Footer, Header } from '../../../../components/common';
+import React from 'react';
 import { CheckoutPanel } from '../../../../components/checkout-panel/checkout-panel';
-import DisplayOffers from '../offers/display-offers';
+import { Footer, Header } from '../../../../components/common';
+import { withSelectedOfferContext } from '../../../../contexts/SelectedOfferContext';
 import { useAppSelector } from '../../../../hooks';
 import { selectIsCheckoutPanelCollapsed } from '../../../../slices/common-slice';
-
+import DisplayOffers from '../offers/display-offers';
 import './dashboard.less';
-import { PrizeoutOffer } from '../../../../slices/offers-slice';
-
-import SelectedOfferContext from '../../../../contexts/SelectedOfferContext';
 
 const Dashboard: React.FC = (): React.ReactElement => {
     const isCheckoutPanelCollapsedView = useAppSelector(selectIsCheckoutPanelCollapsed);
@@ -17,32 +14,22 @@ const Dashboard: React.FC = (): React.ReactElement => {
         'dashboard__wrapper--checkout-panel-collapsed-view': isCheckoutPanelCollapsedView,
     });
 
-    const [activeOffer, setActiveOffer] = React.useState<PrizeoutOffer | null>(null);
-
     return (
         <>
             <div className="dashboard">
                 <Header />
-
-                <SelectedOfferContext.Provider
-                    value={
-                        { activeOffer,
-setActiveOffer } // prettier-ignore
-                    }
-                >
-                    <div className={classes}>
-                        <section className="dashboard__content no-scrollbars">
-                            <div className="dashboard__inner">
-                                <DisplayOffers onOfferClick={setActiveOffer} />
-                            </div>
-                            <Footer />
-                        </section>
-                        <CheckoutPanel />
-                    </div>
-                </SelectedOfferContext.Provider>
+                <div className={classes}>
+                    <section className="dashboard__content no-scrollbars">
+                        <div className="dashboard__inner">
+                            <DisplayOffers />
+                        </div>
+                        <Footer />
+                    </section>
+                    <CheckoutPanel />
+                </div>
             </div>
         </>
     );
 };
 
-export default Dashboard;
+export default withSelectedOfferContext(Dashboard);

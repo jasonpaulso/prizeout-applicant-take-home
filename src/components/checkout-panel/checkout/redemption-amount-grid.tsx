@@ -1,14 +1,15 @@
 import React from 'react';
-import { PrizeoutOffer, PrizeoutOfferValueOptions } from '../../../slices/offers-slice';
+import { PrizeoutOffer } from '../../../slices/offers-slice';
 
 import classNames from 'classnames';
+import SelectedOfferValueContext, { SelectedOfferValueContextValue } from '../../../contexts/selectedOfferValueContext';
 
 const RedemptionAmountGrid: React.FC<{
     offer: PrizeoutOffer;
-    setActiveRedemptionOption: (valueOption: PrizeoutOfferValueOptions) => void;
-    activeRedemptionOption: PrizeoutOfferValueOptions;
-}> = ({ offer, activeRedemptionOption, setActiveRedemptionOption }): React.ReactElement => {
+}> = ({ offer }): React.ReactElement => {
     const { giftcard_list } = offer;
+    const { activeOfferValue, setActiveOfferValue } =
+        React.useContext<SelectedOfferValueContextValue>(SelectedOfferValueContext);
 
     return (
         <div className={'redemption-grid-wrapper'}>
@@ -21,9 +22,9 @@ const RedemptionAmountGrid: React.FC<{
                         <button
                             key={checkout_value_id}
                             className={classNames('redemption-grid__item', {
-                                'redemption-grid__item__selected': activeRedemptionOption === giftCard,
+                                'redemption-grid__item__selected': activeOfferValue === giftCard,
                             })}
-                            onClick={() => setActiveRedemptionOption(giftCard)}
+                            onClick={() => setActiveOfferValue(giftCard)}
                         >
                             {formatCurrency(cost_in_cents)}
                         </button>

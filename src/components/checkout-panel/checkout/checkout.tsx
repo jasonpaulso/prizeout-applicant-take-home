@@ -2,24 +2,34 @@ import React from 'react';
 import checkoutPanelViewWrapper from '../view-wrapper';
 import CheckoutButton from './checkout-button';
 
-import './checkout.less';
 import SelectedOfferContext, { SelectedOfferContextValue } from '../../../contexts/SelectedOfferContext';
-import RedemptionAmountGrid from './redemption-amount-grid';
-import { PrizeoutOfferValueOptions } from '../../../slices/offers-slice';
-import RedemptionSummary from './redemption-summary';
-import { selectIsCollapsedCheckoutPanelOpen } from '../../../slices/checkout-slice';
+import SelectedOfferValueContext, {
+    SelectedOfferValueContextValue,
+    withSelectedOfferValueContext,
+} from '../../../contexts/selectedOfferValueContext';
 import { useAppSelector } from '../../../hooks';
+import { selectIsCollapsedCheckoutPanelOpen } from '../../../slices/checkout-slice';
+import './checkout.less';
+import RedemptionAmountGrid from './redemption-amount-grid';
+import RedemptionSummary from './redemption-summary';
 
 const CheckoutPanelView: React.FC = (): React.ReactElement => {
     const { activeOffer } = React.useContext<SelectedOfferContextValue>(SelectedOfferContext);
-    const [activeRedemptionOption, setActiveRedemptionOption] = React.useState<PrizeoutOfferValueOptions | null>(null);
+
+    const { activeOfferValue, setActiveOfferValue } =
+        React.useContext<SelectedOfferValueContextValue>(SelectedOfferValueContext);
+
     const isCollapsedCheckoutPanelOpen = useAppSelector(selectIsCollapsedCheckoutPanelOpen);
 
     React.useEffect(() => {
         if (!isCollapsedCheckoutPanelOpen) {
-            setActiveRedemptionOption(null);
+            setActiveOfferValue(null);
         }
     }, [isCollapsedCheckoutPanelOpen]);
+
+    React.useEffect(() => {
+        setActiveOfferValue(null);
+    }, [activeOffer]);
 
     return (
         <section className="checkout">
@@ -29,21 +39,15 @@ const CheckoutPanelView: React.FC = (): React.ReactElement => {
                         <h2>{activeOffer ? activeOffer.name : 'Select a Gift Card to view redemption amounts'}</h2>
                         {activeOffer ? (
                             <>
-                                <RedemptionAmountGrid
-                                    offer={activeOffer}
-                                    activeRedemptionOption={activeRedemptionOption}
-                                    setActiveRedemptionOption={setActiveRedemptionOption}
-                                />
-                                {activeRedemptionOption ? (
-                                    <RedemptionSummary activeRedemptionOption={activeRedemptionOption} />
-                                ) : null}
+                                <RedemptionAmountGrid offer={activeOffer} />
+                                {activeOfferValue ? <RedemptionSummary /> : null}
                             </>
                         ) : null}
                     </section>
                 </div>
                 <div className="grid__item">
                     <section className="checkout__calculation">
-                        <CheckoutButton disabled={!activeRedemptionOption} />
+                        <CheckoutButton disabled={!activeOfferValue} />
                     </section>
                 </div>
             </div>
@@ -51,4 +55,4 @@ const CheckoutPanelView: React.FC = (): React.ReactElement => {
     );
 };
 
-export default checkoutPanelViewWrapper(CheckoutPanelView, 'checkout');
+export default withSelectedOfferValueContext(checkoutPanelViewWrapper(CheckoutPanelView, 'checkout'));
