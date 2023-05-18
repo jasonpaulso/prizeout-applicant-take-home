@@ -1,5 +1,5 @@
 import React from 'react';
-import { PrizeoutOffer, PrizeoutOfferValueOptions } from '../../../slices/offers-slice';
+import { PrizeoutOfferValueOptions } from '../../../slices/offers-slice';
 
 import classNames from 'classnames';
 import { formatCurrency } from './redemption-amount-grid';

@@ -16,14 +16,10 @@ export const OfferGiftCard: React.FC<OfferGiftCardProps> = ({
     onClickHandler,
     isSelected,
 }): React.ReactElement => {
-    let activeOfferId;
-
     const firstGiftCard = offer.giftcard_list[0];
     const offerType = firstGiftCard.display_monetary_bonus ? 'monetary' : 'percentage';
     const offerValue = firstGiftCard.display_bonus;
-    // const classes: string = Classnames('offer-gift-card', {
-    //     'offer-gift-card--selected': activeOfferId === firstGiftCard.checkout_value_id,
-    // });
+
     const classes: string = Classnames('offer-gift-card', {
         'offer-gift-card--selected': isSelected,
     });

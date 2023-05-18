@@ -23,7 +23,10 @@ const Dashboard: React.FC = (): React.ReactElement => {
         <>
             <div className="dashboard">
                 <Header />
-                <SelectedOfferContext.Provider value={{ activeOffer, setActiveOffer }}>
+                <SelectedOfferContext.Provider
+                    value={{ activeOffer,
+setActiveOffer }} // prettier-ignore
+                >
                     <div className={classes}>
                         <section className="dashboard__content no-scrollbars">
                             <div className="dashboard__inner">
