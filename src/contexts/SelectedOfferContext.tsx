@@ -13,7 +13,6 @@ export const withSelectedOfferContext = <P extends Record<string, unknown>>(
 ): React.FC<P> => {
     const WithSelectedOfferContext: React.FC<P> = (props) => {
         const [activeOffer, setActiveOffer] = React.useState<PrizeoutOffer | null>(null);
-        console.log('🚀 ~ file: SelectedOfferContext.tsx:18 ~ activeOffer:', activeOffer);
 
         const value = {
             activeOffer,

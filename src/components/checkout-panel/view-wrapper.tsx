@@ -26,7 +26,6 @@ export function checkoutPanelViewWrapper<P>(
         const isCheckoutPanelLoading = useAppSelector(selectLoading);
 
         const isVisible = currentView == viewName;
-        console.log('🚀 ~ file: view-wrapper.tsx:29 ~ return ~ currentView:', currentView);
 
         const setView = (view: ViewEnum) => {
             dispatch(setCheckoutView(view));
