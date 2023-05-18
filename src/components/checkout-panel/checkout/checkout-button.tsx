@@ -6,7 +6,9 @@ import { PrizeoutOfferValueOptions } from '../../../slices/offers-slice';
 import { AppDispatch } from '../../../store';
 import { Button } from '../../common';
 
-const CheckoutButton: React.FC<{ disabled: boolean }> = ({ disabled }): React.ReactElement => {
+// note: I am not sure that all of this functionality _should_ be in this component, but I as instructions suggested to put it here, I did.
+
+const CheckoutButton: React.FC = (): React.ReactElement => {
     const { activeOfferValue, setActiveOfferValue } =
         React.useContext<SelectedOfferValueContextValue>(SelectedOfferValueContext);
     const [loading, setLoading] = React.useState(false);
@@ -84,7 +86,7 @@ const CheckoutButton: React.FC<{ disabled: boolean }> = ({ disabled }): React.Re
                 size="medium"
                 text={buttonText}
                 type="submit"
-                isDisabled={disabled}
+                isDisabled={!activeOfferValue}
                 isLoading={loading}
             />
         </>

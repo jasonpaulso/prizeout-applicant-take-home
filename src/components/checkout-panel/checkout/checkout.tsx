@@ -47,7 +47,7 @@ const CheckoutPanelView: React.FC = (): React.ReactElement => {
                 </div>
                 <div className="grid__item">
                     <section className="checkout__calculation">
-                        <CheckoutButton disabled={!activeOfferValue} />
+                        <CheckoutButton />
                     </section>
                 </div>
             </div>
