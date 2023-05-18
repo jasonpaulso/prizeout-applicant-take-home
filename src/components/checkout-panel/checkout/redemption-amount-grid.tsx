@@ -12,17 +12,17 @@ const RedemptionAmountGrid: React.FC<{
         React.useContext<SelectedOfferValueContextValue>(SelectedOfferValueContext);
 
     return (
-        <div className={'redemption-grid-wrapper'}>
+        <div className={'redemption-offer-value-grid-wrapper'}>
             <h4>Select Redemption Amount</h4>
-            <div className={'redemption-grid'}>
+            <div className={'redemption-offer-value-grid'}>
                 {giftcard_list.map((giftCard) => {
                     const { cost_in_cents, checkout_value_id } = giftCard;
 
                     return (
                         <button
                             key={checkout_value_id}
-                            className={classNames('redemption-grid__item', {
-                                'redemption-grid__item__selected': activeOfferValue === giftCard,
+                            className={classNames('redemption-offer-value-grid__item', {
+                                'redemption-offer-value-grid__item__selected': activeOfferValue === giftCard,
                             })}
                             onClick={() => setActiveOfferValue(giftCard)}
                         >
