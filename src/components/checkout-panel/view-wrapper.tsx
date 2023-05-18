@@ -19,9 +19,12 @@ export function checkoutPanelViewWrapper<P>(
 ): (props: P) => JSX.Element {
     return (props: P) => {
         const isCheckoutPanelCollapsedView = useAppSelector(selectIsCheckoutPanelCollapsed);
+
         const currentView = useAppSelector(selectCheckoutView);
+
         const dispatch = useDispatch<AppDispatch>();
         const isCheckoutPanelLoading = useAppSelector(selectLoading);
+
         const isVisible = currentView == viewName;
 
         const setView = (view: ViewEnum) => {

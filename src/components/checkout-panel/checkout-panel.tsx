@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
 import Classnames from 'classnames';
-import CheckoutPanelView from './checkout/checkout';
-import CheckoutConfirmationPanelView from './checkout-confirmation/checkout-confirmation';
-import { useAppSelector } from '../../hooks';
-import { selectIsCheckoutPanelCollapsed } from '../../slices/common-slice';
-import useTransition from 'react-transition-state';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
+import useTransition from 'react-transition-state';
+import { useAppSelector } from '../../hooks';
 import { selectIsCollapsedCheckoutPanelOpen, toggleIsCollapsedCheckoutPanelOpen } from '../../slices/checkout-slice';
+import { selectIsCheckoutPanelCollapsed } from '../../slices/common-slice';
+import { AppDispatch } from '../../store';
 import { Overlay } from '../common';
+import CheckoutConfirmationPanelView from './checkout-confirmation/checkout-confirmation';
+import CheckoutPanelView from './checkout/checkout';
 
 import './checkout-panel.less';
 
@@ -22,7 +22,9 @@ export const CheckoutPanel: React.FC = (): React.ReactElement => {
         `checkout-panel z-index-checkout-panel`,
         { 'checkout-panel--side': !isCheckoutPanelCollapsedView },
         { 'checkout-panel--collapsed': isCheckoutPanelCollapsedView },
-        { [`checkout-panel--${transition.status}`]: isCheckoutPanelCollapsedView && transition.status },
+        {
+            [`checkout-panel--${transition.status}`]: isCheckoutPanelCollapsedView && transition.status,
+        },
     );
 
     const closeCheckoutPanel = () => {

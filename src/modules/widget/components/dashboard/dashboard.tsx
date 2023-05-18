@@ -1,11 +1,11 @@
-import React from 'react';
 import Classnames from 'classnames';
-import { Footer, Header } from '../../../../components/common';
+import React from 'react';
 import { CheckoutPanel } from '../../../../components/checkout-panel/checkout-panel';
-import DisplayOffers from '../offers/display-offers';
+import { Footer, Header } from '../../../../components/common';
+import { withSelectedOfferContext } from '../../../../contexts/SelectedOfferContext';
 import { useAppSelector } from '../../../../hooks';
 import { selectIsCheckoutPanelCollapsed } from '../../../../slices/common-slice';
-
+import DisplayOffers from '../offers/display-offers';
 import './dashboard.less';
 
 const Dashboard: React.FC = (): React.ReactElement => {
@@ -32,4 +32,4 @@ const Dashboard: React.FC = (): React.ReactElement => {
     );
 };
 
-export default Dashboard;
+export default withSelectedOfferContext(Dashboard);

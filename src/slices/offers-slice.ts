@@ -687,7 +687,7 @@ export type PrizeoutOffer = {
     tag: string;
 };
 
-type PrizeoutOfferValueOptions = {
+export type PrizeoutOfferValueOptions = {
     checkout_value_id: string;
     cost_in_cents: number;
     display_bonus?: number;
@@ -695,9 +695,10 @@ type PrizeoutOfferValueOptions = {
     value_in_cents: number;
 };
 
-type OffersRequest = {
-    prizeoutSessionId: string;
-};
+// not passing linting, unused?
+// type OffersRequest = {
+//     prizeoutSessionId: string;
+// };
 
 export const offersSlice = createSlice({
     initialState: offersInitialState,
