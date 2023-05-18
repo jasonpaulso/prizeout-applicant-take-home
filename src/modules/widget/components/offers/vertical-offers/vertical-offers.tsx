@@ -9,6 +9,7 @@ import { AppDispatch } from '../../../../../store';
 import { toggleIsCollapsedCheckoutPanelOpen } from '../../../../../slices/checkout-slice';
 
 import './vertical-offers.less';
+import SelectedOfferContext, { SelectedOfferContextValue } from '../../../../../contexts/SelectedOfferContext';
 
 interface OfferView {
     offers: PrizeoutOffer[];
@@ -16,6 +17,8 @@ interface OfferView {
 }
 
 const VerticalOffers: React.FC<OfferView> = ({ offers, viewSettings }): React.ReactElement => {
+    const { activeOffer, setActiveOffer } = React.useContext<SelectedOfferContextValue>(SelectedOfferContext);
+
     const isCheckoutPanelCollapsedView = useAppSelector(selectIsCheckoutPanelCollapsed);
     const heading = viewSettings.title || 'Recommended for you';
     const classes: string = Classnames('vertical-offers');
@@ -25,6 +28,7 @@ const VerticalOffers: React.FC<OfferView> = ({ offers, viewSettings }): React.Re
         if (isCheckoutPanelCollapsedView) {
             dispatch(toggleIsCollapsedCheckoutPanelOpen());
         }
+        setActiveOffer(offer);
     };
 
     const returnOffers = () => {
@@ -33,6 +37,7 @@ const VerticalOffers: React.FC<OfferView> = ({ offers, viewSettings }): React.Re
                 key={`${heading}-${offer.name}`}
                 offer={offer}
                 onClickHandler={() => offerClickHandler(offer)}
+                isSelected={activeOffer === offer}
             />
         ));
     };

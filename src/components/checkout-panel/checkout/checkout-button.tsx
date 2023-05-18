@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../common';
 
-const CheckoutButton: React.FC = (): React.ReactElement => {
+const CheckoutButton: React.FC<{ disabled: boolean }> = ({ disabled }): React.ReactElement => {
     const buttonText = 'Prizeout Gift Card';
     const buttonHandler = () => {
         // Checkout logic here
@@ -16,6 +16,7 @@ const CheckoutButton: React.FC = (): React.ReactElement => {
                 size="medium"
                 text={buttonText}
                 type="submit"
+                isDisabled={disabled}
             />
         </>
     );
